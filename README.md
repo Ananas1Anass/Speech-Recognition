@@ -16,21 +16,58 @@ Some algorithms are used such as  :
 
 # CNN MODL
 
-| CNN Layers | Description                                                                              |
-|------------|------------------------------------------------------------------------------------------|
-| 1          | Image input layer to adjust image dimensions                                             |
-| 2          | To add filter size of pixels (padding equal 3)                                           |
-| 3          | RelU layer (mean and deviation to 0)                                                     |
-| 4          | Add pooling to reduce size with 3 stride and 2 padding                                   |
-| 5          | 2*number of filter(numF) for padding [number of filter =10 ]                             |
-| 6          | RelU layer and maxpooling2dlayer with stride 3 and padding 2(Batch normalization layer)  |
-| 7          | Convolution 2D Layer (3,4*numF, ‘Padding’, ‘same')                                       |
-| 8          | RelU layer (batch normalization)                                                         |
-| 9          | Max Pooling 2D Layer([timePoolSize,1])                                                   |
-| 10         | Dropout Layer (dropout rob), dropout, prevent overfitting                                |
-| 11         | Fully Connected Layer (Number of Classes)                                                |
-| 12         | Softmax Layer :  compute probability of each label                                       |
-| 13         | Classification Layer, classify based on softmax, cost will be x-entropy                  |
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ conv2d (Conv2D)             (None, 32, 32, 32)        160       
+                                                                 
+ max_pooling2d (MaxPooling2D  (None, 16, 16, 32)       0         
+ )                                                               
+                                                                 
+ conv2d_1 (Conv2D)           (None, 16, 16, 64)        8256      
+                                                                 
+ max_pooling2d_1 (MaxPooling  (None, 8, 8, 64)         0         
+ 2D)                                                             
+                                                                 
+ conv2d_2 (Conv2D)           (None, 8, 8, 128)         32896     
+                                                                 
+ max_pooling2d_2 (MaxPooling  (None, 4, 4, 128)        0         
+ 2D)                                                             
+                                                                 
+ conv2d_3 (Conv2D)           (None, 4, 4, 256)         131328    
+                                                                 
+ max_pooling2d_3 (MaxPooling  (None, 2, 2, 256)        0         
+ 2D)                                                             
+                                                                 
+ conv2d_4 (Conv2D)           (None, 2, 2, 1024)        1049600   
+                                                                 
+ max_pooling2d_4 (MaxPooling  (None, 1, 1, 1024)       0         
+ 2D)                                                             
+                                                                 
+ conv2d_5 (Conv2D)           (None, 1, 1, 1024)        4195328   
+                                                                 
+ flatten (Flatten)           (None, 1024)              0         
+                                                                 
+ dense (Dense)               (None, 1024)              1049600   
+                                                                 
+ dropout (Dropout)           (None, 1024)              0         
+                                                                 
+ dense_1 (Dense)             (None, 1024)              1049600   
+                                                                 
+ dropout_1 (Dropout)         (None, 1024)              0         
+                                                                 
+ dense_2 (Dense)             (None, 1024)              1049600   
+                                                                 
+ dropout_2 (Dropout)         (None, 1024)              0         
+                                                                 
+ dense_3 (Dense)             (None, 20)                20500     
+                                                                 
+=================================================================
+Total params: 8,586,868
+Trainable params: 8,586,868
+Non-trainable params: 0
+_________________________________________________________________
 
 Based on : Ayad Alsobhani  et al  2021  J. Phys.: Conf. Ser.  1973  012166
 
